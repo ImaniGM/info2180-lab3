@@ -1,7 +1,7 @@
 "use strict";
 
-document.addEventListener('DOMContentLoaded', () =>{ 
-      
+var restart= document.addEventListener('DOMContentLoaded', () =>{ 
+    
 var winning_combinations = [
      [0,1,2],
      [3,4,5],
@@ -45,24 +45,25 @@ for(i = 0; i < s.length; i++)
         e.target.innerHTML= player_x;
         e.target.classList.add ("X");
         lastClicked= player_x;
-        getWinner()
+       
        
       } else{
-        if(lastClicked==player_x){
+        if (lastClicked==player_x){
           e.target.innerHTML= player_o;
           e.target.classList.add("O");
           lastClicked= player_o;
-          getWinner()
+         
         }else{
           e.target.innerHTML= player_x;
           e.target.classList.add("X");
           lastClicked= player_x;
-          getWinner()
+         
         }
       }
      
       turn +=1;
-      console.log(turn)
+      getWinner()
+      
       } 
       function hoverTask(e){
         e.target.classList.add("hover");
@@ -75,23 +76,31 @@ for(i = 0; i < s.length; i++)
          const status= document.getElementById("status")     
  
          function getWinner(){
-  for(i=0; i<= squareArray.length; i++) {
+  for(i=0; i < winning_combinations.length; i++) {
      if (squareArray[winning_combinations[i][0]].innerHTML=="X" && squareArray[winning_combinations[i][1]].innerHTML=="X" && 
-     squareArray[winning_combinations[i][2]].innerHTML=="X" && squareArray[winning_combinations[i][3]].innerHTML=="X" &&
-      squareArray[winning_combinations[i][4]].innerHTML=="X" && squareArray[winning_combinations[i][5]].innerHTML=="X" &&
-       squareArray[winning_combinations[i][6]].innerHTML=="X" && squareArray[winning_combinations[i][7]].innerHTML=="X" ) {
+     squareArray[winning_combinations[i][2]].innerHTML=="X") {
        status.innerHTML= "Congratulations! X is the Winner!"
        status.setAttribute("class","you-won")
        }else if (squareArray[winning_combinations[i][0]].innerHTML=="O" && squareArray[winning_combinations[i][1]].innerHTML=="O" && 
-       squareArray[winning_combinations[i][2]].innerHTML=="O" && squareArray[winning_combinations[i][3]].innerHTML=="O" &&
-        squareArray[winning_combinations[i][4]].innerHTML=="O" && squareArray[winning_combinations[i][5]].innerHTML=="O" &&
-         squareArray[winning_combinations[i][6]].innerHTML=="O" && squareArray[winning_combinations[i][7]].innerHTML=="O"){
+       squareArray[winning_combinations[i][2]].innerHTML=="O"){
           status.innerHTML= "Congratulations! O is the Winner!"
           status.setAttribute("class","you-won")
        }
 
-    }
-  
-}})
+    }}
+  var button= document.getElementsByClassName("btn")[0];
+  button.addEventListener('click', game);
+    function game(){
+      for (i=0; i<squareArray.length; i++){
+        squareArray[i].innerHTML="";
+        status.classList.remove("you-won");
+        status.innerHTML="Move your mouse over a square and click to play an X or an O."
+        restart;
+        
+       }
+     
+      }
+      
+      })
 
   
